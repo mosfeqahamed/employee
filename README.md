@@ -1,4 +1,6 @@
 
+![Alt text](./dashboard.png)
+
 # Django Records Management System
 
 This is a simple Django web application for managing employee records. It includes features like searching, sorting, filtering, pagination, and CRUD operations (Create, Read, Update, Delete) for records. The system also handles image uploads with resizing functionality to optimize loading times.
