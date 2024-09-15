@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Search Form Box -->
+        <div class="card p-3 mb-4" style="background-color: #5d6d7e; border: 1px solid #ddd; margin-right: auto;">
+            <form method="GET" action="{% url 'dashboard' %}">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" name="Name" value="{{ request.GET.Name }}" class="form-control" placeholder="Name" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" name="DateOfBirth" value="{{ request.GET.DateOfBirth }}" class="form-control" placeholder="Date of Birth" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" name="Email" value="{{ request.GET.Email }}" class="form-control" placeholder="Email" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" name="Mobile" value="{{ request.GET.Mobile }}" class="form-control" placeholder="Mobile" />
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Search <!-- Search Icon -->
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table for displaying records with sorting buttons -->
+        <table class="table table-hover table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Photo</th>
+
+                    <!-- Full Name Sort Button -->
+                    <th scope="col">
+                        Full name
+                        <a href="?sort_by=full_name&order={% if sort_by == 'full_name' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                            <i class="fa fa-sort"></i>
+                        </a>
+                    </th>
+
+                    <!-- Email Sort Button -->
+                    <th scope="col">
+                        Email
+                        <a href="?sort_by=email&order={% if sort_by == 'email' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                            <i class="fa fa-sort"></i>
+                        </a>
+                    </th>
+
+                    <!-- Mobile Sort Button -->
+                    <th scope="col">
+                        Mobile
+                        <a href="?sort_by=mobile&order={% if sort_by == 'mobile' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                            <i class="fa fa-sort"></i>
+                        </a>
+                    </th>
+
+                    <!-- Date of Birth Sort Button -->
+                    <th scope="col">
+                        Date of Birth
+                        <a href="?sort_by=date_of_birth&order={% if sort_by == 'date_of_birth' and order == 'asc' %}desc{% else %}asc{% endif %}">
+                            <i class="fa fa-sort"></i>
+                        </a>
+                    </th>
+
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if records %}
+                    {% for record in records %}
+                        <tr>
+                            <td>
+                                <img src="{{ record.photo.url }}" alt="{{ record.full_name }}" width="50" height="50">
+                            </td>
+                            <td>{{ record.full_name }}</td>
+                            <td>{{ record.email }}</td>
+                            <td>{{ record.mobile }}</td>
+                            <td>{{ record.date_of_birth }}</td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="{% url 'update-record' record.id %}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'delete-record' record.id %}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No records found.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if records.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ records.previous_page_number }}&sort_by={{ sort_by }}&order={{ order }}&Name={{ request.GET.Name }}&DateOfBirth={{ request.GET.DateOfBirth }}&Email={{ request.GET.Email }}&Mobile={{ request.GET.Mobile }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in records.paginator.page_range %}
+                        {% if records.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}&sort_by={{ sort_by }}&order={{ order }}&Name={{ request.GET.Name }}&DateOfBirth={{ request.GET.DateOfBirth }}&Email={{ request.GET.Email }}&Mobile={{ request.GET.Mobile }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if records.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ records.next_page_number }}&sort_by={{ sort_by }}&order={{ order }}&Name={{ request.GET.Name }}&DateOfBirth={{ request.GET.DateOfBirth }}&Email={{ request.GET.Email }}&Mobile={{ request.GET.Mobile }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
