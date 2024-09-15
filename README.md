@@ -12,7 +12,7 @@ This is a simple Django web application for managing employee records. It includ
   - Create new records with photo upload.
   - Update existing records.
   - Delete records with confirmation.
-- **Image Upload**: Uploaded photos are resized to a maximum of 800x800 pixels to improve performance.
+- **Image Upload**: Uploaded photos are resized to a maximum of 300x300 pixels to improve performance.
   
 ## Technologies Used
 
