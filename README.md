@@ -28,11 +28,12 @@ This is a simple Django web application for managing employee records. It includ
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   cd employee
    
-2.Create a virtual environment:
-python -m venv env
-source env/bin/activate  # On Windows, use `env\Scripts\activate`
+2. cd env/Scripts
+Activate the activate.bat: .\activate.bat
+
+3. comming back to employee directory and write " cd employ_management " to the terminal
 
 3.Install dependencies:
 pip install -r requirements.txt
