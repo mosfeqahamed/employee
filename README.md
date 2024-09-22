@@ -31,20 +31,21 @@ This is a simple Django web application for managing employee records. It includ
    cd employee
    
 2. cd env/Scripts
+
 Activate the activate.bat: .\activate.bat
 
 3. comming back to employee directory and write " cd employ_management " to the terminal
 
-3.Install dependencies:
+4.Install dependencies:
 pip install -r requirements.txt
 
-4.Set up the database:
+5.Set up the database:
 python manage.py migrate
 
-5.Create a superuser to access the admin panel:
+6.Create a superuser to access the admin panel:
 python manage.py createsuperuser
 
-6.Run the development server:
+7.Run the development server:
 python manage.py runserver
 
-7.Access the application at http://127.0.0.1:8000/.
+8.Access the application at http://127.0.0.1:8000/.
