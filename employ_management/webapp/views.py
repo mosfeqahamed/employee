@@ -80,8 +80,6 @@ def delete_record(request, pk):
         messages.success(request, f'Record for {record.full_name} has been deleted.')
         return redirect('dashboard')  # Redirect to the dashboard after deletion
 
-    return render(request, 'delete_confirm.html', {'record': record})
-
 
 
 def update_record(request, pk):

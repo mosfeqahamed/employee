@@ -10,3 +10,12 @@ setTimeout(function()
 
 
 }, 5000);
+function confirmDelete(recordId) {
+    // Show confirmation dialog
+    const confirmed = confirm('Are you sure you want to delete this record?');
+    
+    if (confirmed) {
+        // Submit the form if user confirms
+        document.getElementById(`delete-form-${recordId}`).submit();
+    }
+}

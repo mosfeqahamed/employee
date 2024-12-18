@@ -42,6 +42,18 @@
         {% block content %}
         {% endblock %}
 
+        <script>
+            function confirmDelete(recordId) {
+                // Show confirmation dialog
+                const confirmed = confirm('Are you sure you want to delete this record?');
+                
+                if (confirmed) {
+                    // Submit the form if user confirms
+                    document.getElementById(`delete-form-${recordId}`).submit();
+                }
+            }
+        </script>
+
         <!-- Custom scripts -->
         <script src="{% static 'js/app.js' %}"></script>
 
